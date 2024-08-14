@@ -119,12 +119,6 @@ export default function Detail() {
 
   return (
     <div className="flex md:flex-row flex-col md:gap-16 gap-6 w-fit">
-      <button
-        onClick={onClickDownload}
-        className="md:hidden bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        ダウンロード
-      </button>
       <section>
         {!isDocumentLoaded ? (
           <>
@@ -141,6 +135,12 @@ export default function Detail() {
           isFullscreenEnabled={true}
         />
       </section>
+      <button
+        onClick={onClickDownload}
+        className="md:hidden bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        ダウンロード
+      </button>
       <section className="flex flex-col items-start">
         <div className="hidden md:block mb-8 p-2 bg-white">
           <QRCodeSVG value={item.url} />
