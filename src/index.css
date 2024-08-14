@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 body {
-    background-image: url(wood-texture.jpg);
+    background-image: url("/wood-texture.jpg");
 }
