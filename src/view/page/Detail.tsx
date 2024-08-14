@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { Bira } from "../../domain/bira/model";
@@ -9,10 +9,13 @@ import OverlayedLoader from "../component/OverlayedLoader";
 import PDFViewer from "../component/PDFViewer";
 import { PATH_HOME } from "../route";
 import { QRCodeSVG } from "qrcode.react";
+import { AdminContext } from "../context/AdminContext";
 
 export default function Detail() {
   const params = useParams();
   const navigate = useNavigate();
+
+  const isLoggedInAsAdmin = useContext(AdminContext);
 
   const [item, setItem] = useState<Bira | null>(null);
   const [date, setDate] = useState("");
@@ -141,24 +144,27 @@ export default function Detail() {
         <div className="hidden md:block mb-8 p-2 bg-white">
           <QRCodeSVG value={item.url} />
         </div>
-        {/* TODO: adminであれば出す */}
-        <div>
-          <span>日付: </span>
-          <span className="text-caption">※選択し直すと変更されます</span>
-        </div>
-        <input
-          type="date"
-          name="date"
-          className="border-2 border-indigo-300 p-1 rounded"
-          value={date}
-          onChange={onChangeDate}
-        />
-        <button
-          className="mt-4 sm:mt-12 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-          onClick={onClickDelete}
-        >
-          削除
-        </button>
+        {isLoggedInAsAdmin && (
+          <>
+            <div>
+              <span>日付: </span>
+              <span className="text-caption">※選択し直すと変更されます</span>
+            </div>
+            <input
+              type="date"
+              name="date"
+              className="border-2 border-indigo-300 p-1 rounded"
+              value={date}
+              onChange={onChangeDate}
+            />
+            <button
+              className="mt-4 sm:mt-12 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              onClick={onClickDelete}
+            >
+              削除
+            </button>
+          </>
+        )}
       </section>
     </div>
   );

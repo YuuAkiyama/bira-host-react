@@ -6,7 +6,7 @@ import {
   query,
   getDocs,
 } from "firebase/firestore";
-import { adminFromDoc, type Admin } from "./model";
+import { adminFromDoc, type User } from "./model";
 
 const COLLECTION_PATH = "admin";
 
@@ -28,7 +28,7 @@ class AdminRepository {
   // TODO: ページ分割
   // TODO: ネットワークエラーの扱い方(SDKがキャッシュとかうまいこと使うので状況を調べきれてない)
   // NOTE: 検索要件が増えてきたら、model.tsにSearchParamsとして型を設けて整理する
-  async list(): Promise<Admin[]> {
+  async list(): Promise<User[]> {
     const q = query(collection(this.delegate, COLLECTION_PATH));
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((doc) => adminFromDoc(doc.id, doc.data()));

@@ -1,8 +1,11 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { PATH_HOME, PATH_UPLOAD } from "../route";
+import { useContext } from "react";
+import { AdminContext } from "../context/AdminContext";
 
 export default function Layout() {
   const location = useLocation();
+  const isLoggedInAsAdmin = useContext(AdminContext);
   return (
     <div>
       {/* A "layout route" is a good place to put markup you want to
@@ -15,12 +18,14 @@ export default function Layout() {
           {/* TODO: いまのページに応じて切り替え */}
           {location.pathname !== PATH_HOME ? (
             <li>
-              <Link to={PATH_HOME}>戻る</Link>
+              <Link to={PATH_HOME}>&lt; 戻る</Link>
             </li>
-          ) : (
+          ) : isLoggedInAsAdmin ? (
             <li>
               <Link to={PATH_UPLOAD}>アップロード</Link>
             </li>
+          ) : (
+            <></>
           )}
         </ul>
       </nav>
