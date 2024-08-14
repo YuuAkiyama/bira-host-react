@@ -6,6 +6,7 @@ import { formatDate, getCurrentDate } from "../../lib/date";
 import OverlayedLoader from "../component/OverlayedLoader";
 import PDFViewer from "../component/PDFViewer";
 import { PATH_DETAIL_TO } from "../route";
+import { getScaleForScreen } from "../../lib/screen";
 
 export default function Home() {
   const api = NewBiraRepository();
@@ -15,6 +16,8 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [items, setItems] = useState<Bira[]>([]);
   const [date, setDate] = useState(todayString);
+
+  const scale = getScaleForScreen();
 
   const onChangeDate = (e: ChangeEvent<HTMLInputElement>) => {
     const dateString = e.target.value;
@@ -54,12 +57,12 @@ export default function Home() {
         <input type="date" name="date" value={date} onChange={onChangeDate} />
         <span className="ml-2">以降のお知らせ</span>
       </section>
-      <section className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-8 ">
+      <section className="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-8">
         {items.map((item) => {
           return (
             <div key={item.id} className="cursor-pointer">
               <Link to={PATH_DETAIL_TO(item.id)}>
-                <PDFViewer url={item.url} showPager={false} />
+                <PDFViewer url={item.url} showPager={false} scale={scale} />
               </Link>
             </div>
           );
