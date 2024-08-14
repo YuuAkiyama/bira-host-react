@@ -52,6 +52,16 @@ export default function PDFViewer({
         file={url}
         onLoadSuccess={onDocumentLoadSuccess}
         className={"cursor-pointer"}
+        loading={
+          <div
+            className="bg-white"
+            style={{
+              aspectRatio: "1 / 1.414",
+              height: "80vh!important",
+              width: "auto!important",
+            }}
+          ></div>
+        }
       >
         <Page onClick={onClickPage} pageNumber={pageNumber} />
       </Document>
