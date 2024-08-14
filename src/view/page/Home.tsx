@@ -2,7 +2,8 @@ import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { Bira } from "../../domain/bira/model";
 import { NewBiraRepository } from "../../domain/bira/repository";
 import { formatDate, getCurrentDate } from "../../lib/date";
-import Sample from "../component/Sample";
+import { Link } from "react-router-dom";
+import { PATH_DETAIL_TO } from "../route";
 
 export default function Home() {
   const api = NewBiraRepository();
@@ -51,9 +52,12 @@ export default function Home() {
       <h2>Home</h2>
       <input type="date" name="date" value={date} onChange={onChangeDate} />
       <span>以降のお知らせ</span>
-      <Sample />
       {items.map((item) => {
-        return <div>{item.name}</div>;
+        return (
+          <div key={item.id}>
+            <Link to={PATH_DETAIL_TO(item.id)}>{item.id}</Link>
+          </div>
+        );
       })}
     </div>
   );

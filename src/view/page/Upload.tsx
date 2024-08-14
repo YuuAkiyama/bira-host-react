@@ -76,7 +76,7 @@ export default function Upload() {
   return (
     <>
       {isLoading ? <OverlayedLoader /> : <></>}
-      <section className="flex-column">
+      <section className="flex flex-col">
         <div className="mt-12">
           <span>1. </span>
           <span>お知らせの日付</span>
