@@ -37,20 +37,16 @@ class BiraRepository {
       collection(this.delegate, COLLECTION_PATH),
       data,
     );
-    console.log(docRef.id, docRef.path);
     return docRef.id;
   }
 
   async get(id: string): Promise<Bira | null> {
     const docRef = doc(this.delegate, COLLECTION_PATH, id);
     const docSnap = await getDoc(docRef);
-
     if (docSnap.exists()) {
       const data = docSnap.data();
       return biraFromDoc(docSnap.id, data);
     }
-
-    console.log("ドキュメントが見つかりませんでした");
     return null;
   }
 

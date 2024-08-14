@@ -16,7 +16,6 @@ export default function App() {
 
   useEffect(() => {
     return listenAuthStateChange((userOrNull) => {
-      console.log("user", userOrNull);
       if (!userOrNull) {
         setIsLoggedInAsAdmin(false);
         return;

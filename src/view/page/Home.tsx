@@ -41,7 +41,6 @@ export default function Home() {
 
   useEffect(() => {
     loadBiraList(date);
-    console.log("load");
   }, [date, loadBiraList]);
 
   if (isLoading) {

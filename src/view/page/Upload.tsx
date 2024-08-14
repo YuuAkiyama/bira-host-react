@@ -26,7 +26,6 @@ export default function Upload() {
   };
   const onChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length) {
-      console.log(e.target.files[0]);
       setFile(e.target.files[0]);
       return;
     }
