@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
-import { PATH_DETAIL, PATH_LOGIN, PATH_UPLOAD } from "../route";
+import { PATH_LOGIN, PATH_UPLOAD } from "../route";
 
 export default function Layout() {
   return (
