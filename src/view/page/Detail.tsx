@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { Bira } from "../../domain/bira/model";
 import { NewBiraRepository } from "../../domain/bira/repository";
+import { isValidDateString } from "../../lib/date";
 import { NewStorage } from "../../lib/storage";
 import OverlayedLoader from "../component/OverlayedLoader";
 import PDFViewer from "../component/PDFViewer";
@@ -50,8 +51,30 @@ export default function Detail() {
     setIsDocumentLoaded(true);
   };
 
-  const onChangeDate = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
+  const onChangeDate = async (e: ChangeEvent<HTMLInputElement>) => {
+    const date = e.target.value;
+    if (!params.id) {
+      navigate(PATH_HOME);
+      return;
+    }
+    if (!isValidDateString(date)) {
+      alert(
+        "すみません、対応していないブラウザのようです。。日付が yyyy-MM-dd の形式になっていません。",
+      );
+      return;
+    }
+
+    setDate(date);
+    setIsLoading(true);
+    try {
+      await api.updateDate(params.id, date);
+      toast.success("更新されました。");
+    } catch (e) {
+      console.error(e);
+      toast.error("更新に失敗しました。");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const onClickDelete = async () => {
@@ -84,7 +107,7 @@ export default function Detail() {
   }
 
   return (
-    <div>
+    <div className="flex gap-16">
       <section>
         {!isDocumentLoaded ? (
           <>
@@ -100,7 +123,7 @@ export default function Detail() {
           onDocumentLoaded={onDocumentLoaded}
         />
       </section>
-      <section className="flex flex-col">
+      <section className="flex flex-col items-start">
         {/* TODO: adminであれば出す */}
         <div>
           <span>日付: </span>
@@ -109,7 +132,7 @@ export default function Detail() {
         <input
           type="date"
           name="date"
-          className="mb-2"
+          className="ml-2 border-2 rounded"
           value={date}
           onChange={onChangeDate}
         />

@@ -26,7 +26,7 @@ export default function Layout() {
       {/* An <Outlet> renders whatever child route is currently active,
           so you can think about this <Outlet> as a placeholder for
           the child routes we defined above. */}
-      <main className="px-10">
+      <main className="px-10 pb-10">
         <Outlet />
       </main>
     </div>
