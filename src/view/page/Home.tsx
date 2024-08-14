@@ -50,8 +50,14 @@ export default function Home() {
 
   return (
     <div>
-      <section className="bg-red-100 w-fit rounded p-2">
-        <input type="date" name="date" value={date} onChange={onChangeDate} />
+      <section className="bg-gray-200 w-fit rounded px-4 py-2">
+        <input
+          type="date"
+          className="border-2 border-indigo-300 p-1 rounded"
+          name="date"
+          value={date}
+          onChange={onChangeDate}
+        />
         <span className="ml-2">以降のお知らせ</span>
       </section>
       <section className="my-4 grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">

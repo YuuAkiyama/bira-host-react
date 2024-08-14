@@ -76,12 +76,12 @@ export default function Upload() {
   return (
     <>
       {isLoading ? <OverlayedLoader /> : <></>}
-      <section className="flex flex-col">
-        <div className="mt-12">
+      <section className="flex flex-col w-fit bg-gray-200 px-12 py-10  rounded">
+        <div>
           <span>1. </span>
           <span>お知らせの日付</span>
           <input
-            className="ml-2 border-2 rounded"
+            className="ml-2 border-2 border-indigo-300 rounded p-1"
             type="date"
             name="date"
             value={date}
@@ -99,7 +99,7 @@ export default function Upload() {
         </div>
         <button
           onClick={onClickButton}
-          className="mt-12 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="self-end mt-12 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-fit"
         >
           登録
         </button>

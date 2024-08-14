@@ -138,7 +138,7 @@ export default function Detail() {
         />
       </section>
       <section className="flex flex-col items-start">
-        <div className="hidden md:block my-8 p-2 bg-white">
+        <div className="hidden md:block mb-8 p-2 bg-white">
           <QRCodeSVG value={item.url} />
         </div>
         {/* TODO: adminであれば出す */}
@@ -149,7 +149,7 @@ export default function Detail() {
         <input
           type="date"
           name="date"
-          className="border-2 rounded"
+          className="border-2 border-indigo-300 p-1 rounded"
           value={date}
           onChange={onChangeDate}
         />
