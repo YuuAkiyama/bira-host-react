@@ -1,8 +1,10 @@
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Bira } from "../../domain/bira/model";
 import { NewBiraRepository } from "../../domain/bira/repository";
 import { formatDate, getCurrentDate } from "../../lib/date";
-import { Link } from "react-router-dom";
+import OverlayedLoader from "../component/OverlayedLoader";
+import PDFViewer from "../component/PDFViewer";
 import { PATH_DETAIL_TO } from "../route";
 
 export default function Home() {
@@ -43,22 +45,26 @@ export default function Home() {
   }, [date, loadBiraList]);
 
   if (isLoading) {
-    // TODO: Loader
-    return <div>よみこみ中</div>;
+    return <OverlayedLoader />;
   }
 
   return (
     <div>
-      <h2>Home</h2>
-      <input type="date" name="date" value={date} onChange={onChangeDate} />
-      <span>以降のお知らせ</span>
-      {items.map((item) => {
-        return (
-          <div key={item.id}>
-            <Link to={PATH_DETAIL_TO(item.id)}>{item.id}</Link>
-          </div>
-        );
-      })}
+      <section className="my-4 bg-red-100 w-fit rounded p-2">
+        <input type="date" name="date" value={date} onChange={onChangeDate} />
+        <span className="ml-2">以降のお知らせ</span>
+      </section>
+      <section className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-8 ">
+        {items.map((item) => {
+          return (
+            <div key={item.id} className="cursor-pointer">
+              <Link to={PATH_DETAIL_TO(item.id)}>
+                <PDFViewer url={item.url} showPager={false} />
+              </Link>
+            </div>
+          );
+        })}
+      </section>
     </div>
   );
 }
