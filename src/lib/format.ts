@@ -1,7 +1,7 @@
 export function padZero(number: number, maxDigit: number): string {
-  let result = `${number}`
+  let result = `${number}`;
   while (result.length < maxDigit) {
-    result = `0${result}`
+    result = `0${result}`;
   }
-  return result
+  return result;
 }
