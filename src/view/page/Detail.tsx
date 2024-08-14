@@ -8,13 +8,10 @@ import { NewStorage } from "../../lib/storage";
 import OverlayedLoader from "../component/OverlayedLoader";
 import PDFViewer from "../component/PDFViewer";
 import { PATH_HOME } from "../route";
-import { getScaleForScreen } from "../../lib/screen";
 
 export default function Detail() {
   const params = useParams();
   const navigate = useNavigate();
-
-  const scale = getScaleForScreen();
 
   const [item, setItem] = useState<Bira | null>(null);
   const [date, setDate] = useState("");
@@ -110,7 +107,7 @@ export default function Detail() {
   }
 
   return (
-    <div className="flex gap-16">
+    <div className="flex md:flex-row sm:flex-col gap-16 w-fit">
       <section>
         {!isDocumentLoaded ? (
           <>
@@ -124,7 +121,6 @@ export default function Detail() {
           url={item.url}
           showPager={true}
           onDocumentLoaded={onDocumentLoaded}
-          scale={scale}
         />
       </section>
       <section className="flex flex-col items-start">

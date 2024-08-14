@@ -5,3 +5,33 @@
 body {
     background-image: url("/wood-texture.jpg");
 }
+
+.react-pdf__Page__canvas {
+    aspect-ratio: 1 / 1.414;
+}
+.grid {
+    .react-pdf__Page__canvas {
+        margin: 0 auto;
+        user-select: inherit !important;
+        
+        /* sm */
+        @media (width < 640px) {
+            width: 90vw!important;
+            height: auto!important;
+        }
+        /* lg */
+        @media (640px <= width <= 1024px) {
+            width: 42vw!important;
+            height: auto!important;
+        }
+        /* xl */
+        @media (1024px < width) {
+            width: 30vw!important;
+            height: auto!important;
+        }
+    }
+}
+/* .react-pdf__Page__textContent {
+    user-select: inherit;
+    cursor: pointer !important;
+} */

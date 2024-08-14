@@ -9,12 +9,10 @@ export default function PDFViewer({
   url,
   showPager,
   onDocumentLoaded,
-  scale,
 }: {
   url: string;
   showPager: boolean;
   onDocumentLoaded?: () => void;
-  scale: number;
 }) {
   const [numPages, setNumPages] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
@@ -44,7 +42,7 @@ export default function PDFViewer({
         file={url}
         onLoadSuccess={onDocumentLoadSuccess}
       >
-        <Page scale={scale} pageNumber={pageNumber} />
+        <Page pageNumber={pageNumber} />
       </Document>
       {showPager ? (
         <div>

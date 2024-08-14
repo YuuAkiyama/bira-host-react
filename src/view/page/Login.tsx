@@ -41,16 +41,27 @@ export default function Login() {
 
   return (
     <div>
-      <h2>Login</h2>
       {userName == "" ? (
-        <div>
-          <button onClick={onClickLogin}>Googleログイン</button>
+        <div className="my-8">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onClick={onClickLogin}
+          >
+            Googleログイン
+          </button>
         </div>
       ) : (
         <div>
           <div>
-            <div>ログイン中のユーザー: {userName}</div>
-            <button onClick={onClickLogout}>Googleログアウト</button>
+            <div className="my-8 bg-white rounded p-4 w-fit">
+              ログイン中のユーザー: {userName}
+            </div>
+            <button
+              onClick={onClickLogout}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              ログアウト
+            </button>
           </div>
         </div>
       )}
