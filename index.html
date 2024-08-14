@@ -4,10 +4,30 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="BIRA HOST" />
+    <meta name="apple-mobile-web-app-title" content="BIRA HOST" />
+    <meta name="msapplication-starturl" content="/" />
     <title>Vite + React + TS</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/sw.js').then(
+          function (registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope)
+          },
+          function (err) {
+            console.log('ServiceWorker registration failed: ', err)
+          }
+        )
+      })
+    }
+  </script>
 </html>

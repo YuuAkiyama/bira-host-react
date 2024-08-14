@@ -1,0 +1,33 @@
+{
+  "name": "BIRA HOST",
+  "start_url": "/",
+  "lang": "ja",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "sizes": "192x192",
+      "src": "/icon-192x192.png",
+      "type": "image/png"
+    },
+    {
+      "sizes": "512x512",
+      "src": "/icon-512x512.png",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot1.png",
+      "sizes": "3018x1466",
+      "type": "image/png",
+      "label": "Homescreen"
+    },
+    {
+      "src": "/screenshot1.png",
+      "sizes": "3018x1466",
+      "type": "image/png",
+      "label": "Homescreen",
+      "form_factor": "wide"
+    }
+  ]
+}
