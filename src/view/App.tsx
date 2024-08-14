@@ -6,6 +6,7 @@ import { PATH_DETAIL, PATH_LOGIN, PATH_UPLOAD } from "./route";
 import Upload from "./page/Upload";
 import Login from "./page/Login";
 import NotFound from "./page/NotFound";
+import { Toaster } from "react-hot-toast";
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
+      <Toaster />
     </div>
   );
 }
