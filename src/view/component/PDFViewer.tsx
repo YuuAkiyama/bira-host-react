@@ -9,10 +9,12 @@ export default function PDFViewer({
   url,
   showPager,
   onDocumentLoaded,
+  isFullscreenEnabled = false,
 }: {
   url: string;
   showPager: boolean;
   onDocumentLoaded?: () => void;
+  isFullscreenEnabled?: boolean;
 }) {
   const [numPages, setNumPages] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
@@ -35,14 +37,23 @@ export default function PDFViewer({
     changePage(1);
   }
 
+  function onClickPage() {
+    if (isFullscreenEnabled) {
+      document
+        .getElementsByClassName("react-pdf__Page__canvas")[0]!
+        .requestFullscreen();
+    }
+  }
+
   return (
     <>
       <Document
         options={options}
         file={url}
         onLoadSuccess={onDocumentLoadSuccess}
+        className={"cursor-pointer"}
       >
-        <Page pageNumber={pageNumber} />
+        <Page onClick={onClickPage} pageNumber={pageNumber} />
       </Document>
       {showPager ? (
         <div>

@@ -138,6 +138,7 @@ export default function Detail() {
           url={item.url}
           showPager={true}
           onDocumentLoaded={onDocumentLoaded}
+          isFullscreenEnabled={true}
         />
       </section>
       <section className="flex flex-col items-start">
