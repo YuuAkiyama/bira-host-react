@@ -6,7 +6,7 @@ export default function Layout() {
     <div>
       {/* A "layout route" is a good place to put markup you want to
           share across all the pages on your site, like navigation. */}
-      <nav>
+      <nav className="p-2 bg-gray-300 underline w-full">
         <ul className="pl-4 flex gap-4">
           {/* TODO: いまのページに応じて切り替え */}
           <li>
@@ -26,7 +26,7 @@ export default function Layout() {
       {/* An <Outlet> renders whatever child route is currently active,
           so you can think about this <Outlet> as a placeholder for
           the child routes we defined above. */}
-      <main className="px-10 pb-10">
+      <main className="px-10 pt-4 pb-10">
         <Outlet />
       </main>
     </div>

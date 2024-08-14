@@ -50,11 +50,11 @@ export default function Home() {
 
   return (
     <div>
-      <section className="my-4 bg-red-100 w-fit rounded p-2">
+      <section className="bg-red-100 w-fit rounded p-2">
         <input type="date" name="date" value={date} onChange={onChangeDate} />
         <span className="ml-2">以降のお知らせ</span>
       </section>
-      <section className="grid lg:grid-cols-3 sm:grid-cols-2 gap-4">
+      <section className="my-4 grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
         {items.map((item) => {
           return (
             <div key={item.id} className="cursor-pointer w-fit">

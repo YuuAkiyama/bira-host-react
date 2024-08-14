@@ -8,6 +8,7 @@ import { NewStorage } from "../../lib/storage";
 import OverlayedLoader from "../component/OverlayedLoader";
 import PDFViewer from "../component/PDFViewer";
 import { PATH_HOME } from "../route";
+import { QRCodeSVG } from "qrcode.react";
 
 export default function Detail() {
   const params = useParams();
@@ -49,6 +50,13 @@ export default function Detail() {
 
   const onDocumentLoaded = () => {
     setIsDocumentLoaded(true);
+  };
+
+  const onClickDownload = () => {
+    if (!item) {
+      return;
+    }
+    window.open(item.url, "_blank");
   };
 
   const onChangeDate = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -107,7 +115,13 @@ export default function Detail() {
   }
 
   return (
-    <div className="flex md:flex-row sm:flex-col gap-16 w-fit">
+    <div className="flex md:flex-row flex-col md:gap-16 gap-6 w-fit">
+      <button
+        onClick={onClickDownload}
+        className="md:hidden bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        ダウンロード
+      </button>
       <section>
         {!isDocumentLoaded ? (
           <>
@@ -124,20 +138,23 @@ export default function Detail() {
         />
       </section>
       <section className="flex flex-col items-start">
+        <div className="hidden md:block my-8 p-2 bg-white">
+          <QRCodeSVG value={item.url} />
+        </div>
         {/* TODO: adminであれば出す */}
         <div>
           <span>日付: </span>
-          <span className="ml-1 text-caption">※選択し直すと変更されます</span>
+          <span className="text-caption">※選択し直すと変更されます</span>
         </div>
         <input
           type="date"
           name="date"
-          className="ml-2 border-2 rounded"
+          className="border-2 rounded"
           value={date}
           onChange={onChangeDate}
         />
         <button
-          className="mt-12  bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          className="mt-4 sm:mt-12 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
           onClick={onClickDelete}
         >
           削除
