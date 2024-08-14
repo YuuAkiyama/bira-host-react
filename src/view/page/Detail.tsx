@@ -5,8 +5,8 @@ import { Bira } from "../../domain/bira/model";
 import { NewBiraRepository } from "../../domain/bira/repository";
 import { NewStorage } from "../../lib/storage";
 import OverlayedLoader from "../component/OverlayedLoader";
-import { PATH_HOME } from "../route";
 import PDFViewer from "../component/PDFViewer";
+import { PATH_HOME } from "../route";
 
 export default function Detail() {
   const params = useParams();
@@ -15,6 +15,7 @@ export default function Detail() {
   const [item, setItem] = useState<Bira | null>(null);
   const [date, setDate] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isDocumentLoaded, setIsDocumentLoaded] = useState(false);
 
   const api = NewBiraRepository();
   const storage = NewStorage();
@@ -44,6 +45,10 @@ export default function Detail() {
         navigate(PATH_HOME);
       });
   }, []);
+
+  const onDocumentLoaded = () => {
+    setIsDocumentLoaded(true);
+  };
 
   const onChangeDate = (e: ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
@@ -81,7 +86,19 @@ export default function Detail() {
   return (
     <div>
       <section>
-        <PDFViewer url={item.url} />
+        {!isDocumentLoaded ? (
+          <>
+            <OverlayedLoader />
+            <div className="h-screen w-screen"></div>
+          </>
+        ) : (
+          <></>
+        )}
+        <PDFViewer
+          url={item.url}
+          showPager={true}
+          onDocumentLoaded={onDocumentLoaded}
+        />
       </section>
       <section className="flex flex-col">
         {/* TODO: adminであれば出す */}

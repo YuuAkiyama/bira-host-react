@@ -1,20 +1,26 @@
 import { useState } from "react";
 import { Document, Page } from "react-pdf";
-import OverlayedLoader from "./OverlayedLoader";
 
 const options = {
   cMapUrl: "/cmaps/",
 };
 
-export default function PDFViewer({ url }: { url: string }) {
+export default function PDFViewer({
+  url,
+  showPager,
+  onDocumentLoaded,
+}: {
+  url: string;
+  showPager: boolean;
+  onDocumentLoaded?: () => void;
+}) {
   const [numPages, setNumPages] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
 
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
     setNumPages(numPages);
     setPageNumber(1);
-    setIsLoading(false);
+    onDocumentLoaded?.();
   }
 
   function changePage(offset: number) {
@@ -38,17 +44,12 @@ export default function PDFViewer({ url }: { url: string }) {
       >
         <Page pageNumber={pageNumber} />
       </Document>
-      {isLoading ? (
-        <>
-          <OverlayedLoader />
-          <div className="h-dvh"></div>
-        </>
-      ) : (
+      {showPager ? (
         <div>
           <p>
             ページ {pageNumber || (numPages ? 1 : "--")} / {numPages || "--"}
           </p>
-          <div className="flex gap-2">
+          <div className="flex justify-start gap-2">
             <button
               className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${pageNumber <= 1 ? "opacity-50 cursor-not-allowed" : ""}`}
               type="button"
@@ -67,6 +68,8 @@ export default function PDFViewer({ url }: { url: string }) {
             </button>
           </div>
         </div>
+      ) : (
+        <></>
       )}
     </>
   );
