@@ -7,21 +7,16 @@ export default function Layout() {
       {/* A "layout route" is a good place to put markup you want to
           share across all the pages on your site, like navigation. */}
       <nav>
-        <ul>
+        <ul className="pl-4 flex gap-4">
+          {/* TODO: いまのページに応じて切り替え */}
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">一覧</Link>
           </li>
           <li>
-            <Link to={PATH_DETAIL}>Detail</Link>
+            <Link to={PATH_UPLOAD}>アップロード</Link>
           </li>
           <li>
-            <Link to={PATH_UPLOAD}>Upload</Link>
-          </li>
-          <li>
-            <Link to={PATH_LOGIN}>Login</Link>
-          </li>
-          <li>
-            <Link to="/nothing-here">Nothing Here</Link>
+            <Link to={PATH_LOGIN}>ログイン/ログアウト</Link>
           </li>
         </ul>
       </nav>
@@ -31,7 +26,9 @@ export default function Layout() {
       {/* An <Outlet> renders whatever child route is currently active,
           so you can think about this <Outlet> as a placeholder for
           the child routes we defined above. */}
-      <Outlet />
+      <main className="px-10">
+        <Outlet />
+      </main>
     </div>
   );
 }

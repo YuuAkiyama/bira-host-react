@@ -1,7 +1,109 @@
+import { ChangeEvent, useCallback, useState } from "react";
+import toast from "react-hot-toast";
+import { v4 as uuidv4 } from "uuid";
+import { NewBiraRepository } from "../../domain/bira/repository";
+import { formatDate, getCurrentDate, isValidDateString } from "../../lib/date";
+import OverlayedLoader from "../component/OverlayedLoader";
+
+import { useNavigate } from "react-router-dom";
+import { extractFileExtension } from "../../lib/file";
+import { NewStorage } from "../../lib/storage";
+
 export default function Upload() {
+  const api = NewBiraRepository();
+  const storage = NewStorage();
+  const today = getCurrentDate();
+  const todayString = formatDate(today);
+
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [date, setDate] = useState(todayString);
+  const [file, setFile] = useState<File | null>(null);
+
+  const onChangeDate = (e: ChangeEvent<HTMLInputElement>) => {
+    setDate(e.target.value);
+  };
+  const onChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length) {
+      console.log(e.target.files[0]);
+      setFile(e.target.files[0]);
+      return;
+    }
+  };
+
+  const onClickButton = useCallback(async () => {
+    if (!date) {
+      toast.error("日付を入力してください");
+      return;
+    }
+
+    if (!isValidDateString(date)) {
+      toast.error(
+        "すみません、非対応のブラウザのようです。。。日付が yyyy-MM-dd の形式になっていません。",
+      );
+      return;
+    }
+
+    if (!file) {
+      toast.error("ファイルを選択してください");
+      return;
+    }
+
+    setIsLoading(true);
+
+    // TODO: このあたり BiraService としてまとめる
+    const filename = uuidv4() + extractFileExtension(file.name, ".jpg");
+
+    try {
+      await storage.upload(file, filename);
+      const url = await storage.getDownloadURL(filename);
+      const createdId = await api.add({
+        name: filename,
+        url,
+        date: date,
+      });
+      toast.success("登録が完了しました。");
+      navigate("/detail/" + createdId);
+    } catch (e) {
+      console.error(e);
+      toast.error("登録に失敗しました。");
+    }
+
+    setIsLoading(false);
+  }, [date, file]);
+
   return (
-    <div>
-      <h2>Upload</h2>
-    </div>
+    <>
+      {isLoading ? <OverlayedLoader /> : <></>}
+      <section className="flex-column">
+        <div className="mt-12">
+          <span>1. </span>
+          <span>お知らせの日付</span>
+          <input
+            className="ml-2 border-2 rounded"
+            type="date"
+            name="date"
+            value={date}
+            onChange={onChangeDate}
+          />
+        </div>
+        <div className="mt-12">
+          <span>2. </span>
+          <input
+            type="file"
+            accept="application/pdf"
+            name="upload"
+            onChange={onChangeFile}
+          />
+        </div>
+        <button
+          onClick={onClickButton}
+          className="mt-12 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          登録
+        </button>
+      </section>
+    </>
   );
 }
