@@ -40,8 +40,13 @@ body {
 }
 .pdf-detail {
     .react-pdf__Document {
-        height: 80vh!important;
-        width: auto!important;
+        height: 75vh!important;
+        width: fit-content!important;
+        /* 1つ: sm */
+        @media (width < 640px) {
+            width: 85vw!important;
+            height: auto!important;
+        }
         & * {
             height: 100%!important;
             width: 100%!important;
