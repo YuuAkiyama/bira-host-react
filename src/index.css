@@ -6,11 +6,10 @@ body {
     background-image: url("/wood-texture.jpg");
 }
 
-/* 詳細ページ用 */
 .react-pdf__Page * {
     aspect-ratio: 1 / 1.414;
-    height: 80vh!important;
-    width: auto!important;
+    width: 100%!important;
+    height: auto!important;
     @media (width < 640px) {
         width: 85vw!important;
         height: auto!important;
@@ -39,7 +38,13 @@ body {
         }
     }
 }
-/* .react-pdf__Page__textContent {
-    user-select: inherit;
-    cursor: pointer !important;
-} */
+.pdf-detail {
+    .react-pdf__Document {
+        height: 80vh!important;
+        width: auto!important;
+        & * {
+            height: 100%!important;
+            width: 100%!important;
+        }
+    }
+}

@@ -118,7 +118,7 @@ export default function Detail() {
   }
 
   return (
-    <div className="flex md:flex-row flex-col md:gap-16 gap-6 w-fit">
+    <div className="pdf-detail flex md:flex-row flex-col md:gap-16 gap-6 w-fit">
       <section>
         {!isDocumentLoaded ? (
           <>
