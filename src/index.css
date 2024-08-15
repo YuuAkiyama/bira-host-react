@@ -39,13 +39,15 @@ body {
     }
 }
 .pdf-detail {
+    @media (width < 782px) {
+        /* 画面幅が溢れてしまうため */
+        flex-direction: column!important;
+    }
     .react-pdf__Document {
-        height: 75vh!important;
-        width: fit-content!important;
-        /* 1つ: sm */
-        @media (width < 640px) {
-            width: 85vw!important;
-            height: auto!important;
+        max-height: 80vh!important;
+        aspect-ratio: 1 / 1.414;
+        @media (width < 782px) {
+            max-width: 85vw!important;
         }
         & * {
             height: 100%!important;
