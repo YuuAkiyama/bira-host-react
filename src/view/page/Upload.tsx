@@ -75,7 +75,7 @@ export default function Upload() {
   return (
     <>
       {isLoading ? <OverlayedLoader /> : <></>}
-      <section className="flex flex-col w-fit bg-gray-200 px-12 py-10  rounded">
+      <section className="max-sm:w-full flex flex-col w-fit bg-gray-200 md:px-12 px-2 py-10  rounded">
         <div>
           <span>1. </span>
           <span>お知らせの日付</span>
