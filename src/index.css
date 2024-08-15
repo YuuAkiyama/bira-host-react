@@ -28,12 +28,12 @@ body {
             height: auto!important;
         }
         /* 2つ: sm - lg */
-        @media (640px <= width <= 1024px) {
+        @media (640px <= width < 1024px) {
             width: 42vw!important;
             height: auto!important;
         }
         /* 3つ: xl */
-        @media (1024px < width) {
+        @media (1024px <= width) {
             width: 30vw!important;
             height: auto!important;
         }
