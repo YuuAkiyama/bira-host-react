@@ -1,4 +1,5 @@
-STORAGE_URL=gs://bira-host-st.appspot.com
+# STORAGE_URL=gs://bira-host-st.appspot.com
+STORAGE_URL=gs://bira-host-ts.appspot.com
 
 .PHONY: build
 build:

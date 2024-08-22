@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "bira-host-st"
-  }
+    "default": "bira-host-st",
+    "ts": "bira-host-ts"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }

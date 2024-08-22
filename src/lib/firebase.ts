@@ -3,15 +3,15 @@ import { initializeApp } from "firebase/app";
 // TODO: env
 export function initialize() {
   const firebaseConfig = {
-    apiKey: "AIzaSyAHEumGeMCv4Qmy-LjPTQV0R5tj7I6XxWY",
-    authDomain: "bira-host-st.firebaseapp.com",
-    projectId: "bira-host-st",
-    storageBucket: "bira-host-st.appspot.com",
-    messagingSenderId: "283707259407",
-    appId: "1:283707259407:web:70f82df214b80e7534417a",
+    apiKey: 'AIzaSyCOZkfTmv7PW-zD-rrHTeNfVZr4egfbVUY',
+    authDomain: 'bira-host-ts.firebaseapp.com',
+    projectId: 'bira-host-ts',
+    storageBucket: 'bira-host-ts.appspot.com',
+    messagingSenderId: '406406167951',
+    appId: '1:406406167951:web:160aba1747709581b55ffa'
   };
   initializeApp(firebaseConfig);
 }
 
 // TODO: env
-export const BUCKET_NAME = "gs://bira-host-st.appspot.com";
+export const BUCKET_NAME = "gs://bira-host-ts.appspot.com";
