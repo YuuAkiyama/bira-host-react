@@ -15,6 +15,10 @@ body {
         height: auto!important;
     }
 }
+.react-pdf__Page__textContent.textLayer,
+.react-pdf__Page__annotations.annotationLayer {
+    display: none;
+}
 /* 一覧ページ用 */
 .grid {
     .react-pdf__Page__canvas {
@@ -43,15 +47,29 @@ body {
         /* 画面幅が溢れてしまうため */
         flex-direction: column!important;
     }
+    @media (orientation: portrait) {
+        /* 画面幅が溢れてしまうため */
+        flex-direction: column!important;
+        width: 100%;
+    }
     .react-pdf__Document {
         max-height: 80vh!important;
         aspect-ratio: 1 / 1.414;
-        @media (width < 782px) {
-            max-width: 85vw!important;
-        }
         & * {
             height: 100%!important;
             width: 100%!important;
+        }
+        @media (width < 782px) {
+            width: 100%!important;
+            & * {
+                /* height: 100%!important; */
+                width: fit-content!important;
+            }
+        }
+        @media (orientation: portrait) {
+            max-height: unset;
+            /* TODO: canvasに描画されるPDFのコンテンツを、画面幅に合わせてかしこくリサイズしたうえでセンタリングしたい */
+            width: 92.5w!important;
         }
     }
 }
