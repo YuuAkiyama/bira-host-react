@@ -6,7 +6,10 @@ service cloud.firestore {
 			allow read;
 			allow write: if request.auth != null &&
         request.auth.token.email_verified &&
-				request.auth.uid == 'H1eb6PAdofZz86tg3xaP8MphnTq2';
+				(request.auth.uid == 'mmVmpiRut4VVWmGs871naSflbUp2'
+         || request.auth.uid == '9c3GEV7pXydKDwJMM0HBcPWHo8f2'
+         || request.auth.uid == 'en18iQfAnQXdQfeP0Be89VtfFWO2'
+         || request.auth.uid == 'POI0OwLFpyXmAlNLXkdNGGLFog13');
     }
   }
 }
