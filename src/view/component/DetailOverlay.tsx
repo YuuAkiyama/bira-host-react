@@ -128,7 +128,7 @@ export default function DetailOverlay({
   }
 
   return (
-    <div className="z-50 fixed top-0 left-0 p-8 w-full h-full bg-wood">
+    <div className="z-50 fixed top-0 left-0 p-8 w-full h-full bg-wood overflow-scroll">
       <button
         onClick={onClickClose}
         className="text-sm w-24 h-8 mb-4 text-gray-600 bg-white rounded border border-slate-300 bg-opacity-90"
