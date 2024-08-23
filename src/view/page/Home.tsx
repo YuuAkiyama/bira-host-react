@@ -1,11 +1,10 @@
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { Bira } from "../../domain/bira/model";
 import { NewBiraRepository } from "../../domain/bira/repository";
 import { formatDate, getCurrentDate } from "../../lib/date";
+import DetailOverlay from "../component/DetailOverlay";
 import OverlayedLoader from "../component/OverlayedLoader";
 import PDFViewer from "../component/PDFViewer";
-import { PATH_DETAIL_TO } from "../route";
 
 export default function Home() {
   const api = NewBiraRepository();
@@ -15,6 +14,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [items, setItems] = useState<Bira[]>([]);
   const [date, setDate] = useState(todayString);
+  const [currentDetailId, setCurrentDetailId] = useState("");
 
   const onChangeDate = (e: ChangeEvent<HTMLInputElement>) => {
     const dateString = e.target.value;
@@ -62,10 +62,25 @@ export default function Home() {
       <section className="my-4 grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
         {items.map((item) => {
           return (
-            <div key={item.id} className="cursor-pointer w-fit">
-              <Link to={PATH_DETAIL_TO(item.id)}>
-                <PDFViewer url={item.url} showPager={false} />
-              </Link>
+            <div
+              key={item.id}
+              className="cursor-pointer w-fit"
+              onClick={() => {
+                setCurrentDetailId(item.id);
+                document.body.style.overflow = "hidden";
+              }}
+            >
+              <PDFViewer url={item.url} showPager={false} />
+              {item.id === currentDetailId && (
+                <DetailOverlay
+                  params={{ id: item.id }}
+                  onClose={(e) => {
+                    document.body.style.overflow = "";
+                    e.stopPropagation();
+                    setCurrentDetailId("");
+                  }}
+                />
+              )}
             </div>
           );
         })}
