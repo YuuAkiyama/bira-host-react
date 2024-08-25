@@ -73,3 +73,18 @@
         }
     }
 }
+
+
+@media (orientation: portrait) {
+    .portrait-self-end {
+        align-self: flex-end;
+    }
+    .portrait-gap-0 {
+        gap: 0!important;
+    }
+    .portrait-abs-rb {
+        position: absolute;
+        bottom: -0.25rem;
+        right: 2.65rem;
+    }
+}

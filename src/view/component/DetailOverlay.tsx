@@ -135,7 +135,7 @@ export default function DetailOverlay({
       >
         ＜ 戻る
       </button>
-      <div className="cursor-default pdf-detail flex md:flex-row flex-col md:gap-16 gap-6">
+      <div className="cursor-default pdf-detail flex md:flex-row flex-col md:gap-16 gap-6 portrait-gap-4">
         <section>
           {!isDocumentLoaded ? (
             <>
@@ -159,7 +159,7 @@ export default function DetailOverlay({
           ダウンロード
         </button>
         <section className="flex flex-col items-start">
-          <div className="hidden md:block mb-8 p-2 bg-white">
+          <div className="hidden md:block mb-8 p-2 bg-white portrait-self-end portrait-abs-rb">
             <QRCodeSVG value={item.url} />
           </div>
           {isLoggedInAsAdmin && (
