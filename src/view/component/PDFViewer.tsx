@@ -66,7 +66,7 @@ export default function PDFViewer({
         <Page onClick={onClickPage} pageNumber={pageNumber} />
       </Document>
       {showPager ? (
-        <div className="flex flex-row gap-4 mt-4 justify-end">
+        <div className="flex flex-row gap-4 mt-4 justify-start">
           <p className="bg-white p-1 px-4 leading-8 rounded w-fit">
             ページ {pageNumber || (numPages ? 1 : "--")} / {numPages || "--"}
           </p>

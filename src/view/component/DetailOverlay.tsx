@@ -136,7 +136,7 @@ export default function DetailOverlay({
         ＜ 戻る
       </button>
       <div className="cursor-default pdf-detail flex md:flex-row flex-col md:gap-16 gap-6">
-        <section className="w-full">
+        <section>
           {!isDocumentLoaded ? (
             <>
               <OverlayedLoader />
