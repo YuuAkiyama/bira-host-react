@@ -106,7 +106,7 @@ export default function Upload() {
           />
           <div className="text-sm text-slate-700">
             <div className="mt-2">
-              ※↓でアドビがPDFのサイズ削減してくれます。
+              ※上限20MBにしてます。↓でアドビがPDFのサイズ削減してくれます。
             </div>
             <a
               className="text-blue-600 underline dark:text-blue-500 hover:no-underline"
