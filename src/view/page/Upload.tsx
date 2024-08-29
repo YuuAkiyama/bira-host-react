@@ -104,6 +104,18 @@ export default function Upload() {
             name="upload"
             onChange={onChangeFile}
           />
+          <div className="text-sm text-slate-700">
+            <div className="mt-2">
+              ※↓でアドビがPDFのサイズ削減してくれます。
+            </div>
+            <a
+              className="text-blue-600 underline dark:text-blue-500 hover:no-underline"
+              href="https://www.adobe.com/jp/acrobat/online/compress-pdf.html"
+              target="_blank"
+            >
+              https://www.adobe.com/jp/acrobat/online/compress-pdf.html
+            </a>
+          </div>
         </div>
         <button
           onClick={onClickButton}
