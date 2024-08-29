@@ -26,7 +26,16 @@ export default function Upload() {
   };
   const onChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length) {
-      setFile(e.target.files[0]);
+      const file = e.target.files[0];
+      if (file.size > 21_000_000) {
+        e.target.value = "";
+        toast("ファイルサイズは20MB以下にしてください", {
+          position: "top-center",
+          icon: "🙏",
+        });
+        return;
+      }
+      setFile(file);
       return;
     }
   };
