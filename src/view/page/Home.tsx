@@ -67,7 +67,6 @@ export default function Home() {
               className="cursor-pointer w-fit"
               onClick={() => {
                 setCurrentDetailId(item.id);
-                document.body.style.overflow = "hidden";
               }}
             >
               <PDFViewer url={item.url} showPager={false} />
@@ -75,7 +74,6 @@ export default function Home() {
                 <DetailOverlay
                   params={{ id: item.id }}
                   onClose={(e) => {
-                    document.body.style.overflow = "";
                     e.stopPropagation();
                     setCurrentDetailId("");
                   }}

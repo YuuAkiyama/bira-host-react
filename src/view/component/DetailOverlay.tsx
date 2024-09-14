@@ -33,6 +33,12 @@ export default function DetailOverlay({
 
   // init
   useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+  useEffect(() => {
     if (!params.id) {
       navigate(PATH_HOME);
       return;
