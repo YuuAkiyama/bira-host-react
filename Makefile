@@ -1,6 +1,10 @@
 # STORAGE_URL=gs://bira-host-st.appspot.com
 STORAGE_URL=gs://bira-host-ts.appspot.com
 
+.PHONY: dev
+dev:
+	npm run dev
+
 .PHONY: build
 build:
 	npm run build

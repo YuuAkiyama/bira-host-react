@@ -1,50 +1,54 @@
-# React + TypeScript + Vite
+# ビラホスト
+PDFをアップロード、管理するSPAアプリ。
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 開発に必要なツール
+- make
+- Node.js
+- v20.16.0で開発(適宜アプデ)
+- Firebase CLI
 
-Currently, two official plugins are available:
+# インフラ構成
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Firebase Hosting: SPAアプリを配信
+- Firebase Authentication: 管理者ユーザーの管理
+- Cloud Storage for Firebase: PDFの保管、配信
+- Firestore: PDFの保管パス管理、管理者ユーザーのID管理
 
-## Expanding the ESLint configuration
+# 環境ごとの設定
+- `bira-host-ts`でプロジェクト全体検索をして出てくる箇所を、対象のホスト、ストレージに書き換える。
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+# 開発で使うコマンド
 
-- Configure the top-level `parserOptions` property like this:
+```sh
+# 依存パッケージインストール
+npm i
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+# Firebaseにcliでログイン
+firebase login
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+# Firebaseプロジェクトの選択
+firebase use <プロジェクト名>
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+# 開発モードで起動
+make dev
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+# ビルド
+make build
+
+# デプロイ
+make deploy
+
+# ビルドしてデプロイ
+make build-deploy
+
+# Firestore, Cloud Storageのルールのデプロイ
+make deploy-rules
+# firestore.rules, storage.rulesで、PDFアップロード・削除が出来るユーザーを限定している.
+# request.auth.uidはFirebase AuthenticationのユーザーのUID.
+########################################
+
+# Cloud StorageのCORS設定のデプロイ
+make cors
+# ローカル開発中はcors.jsonのoriginに"*"を追加しておくとlocalhostその他からCloud Storage（PDF）にアクセスできるようになる。
+########################################
 ```
